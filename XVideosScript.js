@@ -33,7 +33,7 @@ const API_HEADERS = {
     "x-app-channel": "BETA",
     "x-app-country": "US",
     "x-app-language": "en",
-    "x-app-main-cat": "straight",
+    "x-app-main-cat": "gay",
     "x-app-mobile-id": "df36aee9-13c2-4eec-b59e-7de3ef564317",
     "x-app-version": "1.7",
 };
@@ -448,7 +448,7 @@ source.getHome = function (continuationToken) {
         }
 
         // Subsequent pages: return videos
-        const url = `${BASE_URL}/home?country=US&language=en&version=STRAIGHT`;
+        const url = `${BASE_URL}/home?country=US&language=en&version=gay`;
         const data = makeApiRequest(url, 'GET', API_HEADERS, null, 'home content');
 
         // API response structure: { result: true, code: 0, data: { ids: [...] } } or legacy { result: true, ids: [...] }
@@ -921,7 +921,7 @@ function getVideoComments(videoId, continuationToken) {
         }
 
         // Fetch comments using threads API - based on memory: XNXX comments API uses POST request to /threads/video-comments/get-posts/top/{VIDEO_ID}/{PAGE}/0
-        const commentsUrl = `${BASE_URL}/threads/video-comments/get-posts/top/${videoId}/${page}/0?country=US&language=en&version=STRAIGHT`;
+        const commentsUrl = `${BASE_URL}/threads/video-comments/get-posts/top/${videoId}/${page}/0?country=US&language=en&version=gay`;
         // Prepare POST data exactly as in the working curl request
         const postData = `load_all=0&loaded_ids=${loadedIds}`;
 
@@ -1029,7 +1029,7 @@ function getCommentReplies(commentId, videoId, continuationToken) {
 
         // Use the exact URL pattern from working curl request for replies
         // This endpoint gets replies for a specific comment
-        const repliesUrl = `${BASE_URL}/threads/video-comments/get-posts/top/${videoId}/${commentId}/0?country=US&language=en&version=STRAIGHT`;
+        const repliesUrl = `${BASE_URL}/threads/video-comments/get-posts/top/${videoId}/${commentId}/0?country=US&language=en&version=gay`;
 
         // Prepare POST data exactly as in the working curl request
         const postData = `load_all=0&loaded_ids=${loadedIds}`;
@@ -1133,7 +1133,7 @@ source.searchSuggestions = function(query) {
         const cleanQuery = encodeURIComponent(query.trim());
 
         // Fetch search suggestions using search-suggest API
-        const suggestUrl = `https://www.xvideos.com/search-suggest/${cleanQuery}?country=US&language=en&version=STRAIGHT`;
+        const suggestUrl = `https://www.xvideos.com/search-suggest/${cleanQuery}?country=US&language=en&version=gay`;
         const response = http.GET(suggestUrl, {}, false);
 
         if (!response.isOk) {
@@ -1201,7 +1201,7 @@ source.searchChannels = function(query) {
         const cleanQuery = encodeURIComponent(query.trim());
 
         // Use search-suggest API to find pornstars and models
-        const suggestUrl = `https://www.xvideos.com/search-suggest/${cleanQuery}?country=US&language=en&version=STRAIGHT`;
+        const suggestUrl = `https://www.xvideos.com/search-suggest/${cleanQuery}?country=US&language=en&version=gay`;
         const response = http.GET(suggestUrl, {}, false);
         
         if (!response.isOk) {
@@ -1327,7 +1327,7 @@ function getPornstarChannel(pornstarName, originalUrl) {
     try {
         // Use search-suggest API to find the pornstar's ID
         const cleanQuery = encodeURIComponent(pornstarName.replace(/-/g, ' '));
-        const suggestUrl = `${BASE_URL}/search-suggest/${cleanQuery}?country=US&language=en&version=STRAIGHT`;
+        const suggestUrl = `${BASE_URL}/search-suggest/${cleanQuery}?country=US&language=en&version=gay`;
         const response = http.GET(suggestUrl, API_HEADERS, false);
 
         if (!response.isOk) {
@@ -1367,7 +1367,7 @@ function getPornstarChannel(pornstarName, originalUrl) {
 
         // Now try to get detailed profile information using the ID
         try {
-            const profileUrl = `${BASE_URL}/profile-page/${matchedStar.id}?country=US&language=en&version=STRAIGHT`;
+            const profileUrl = `${BASE_URL}/profile-page/${matchedStar.id}?country=US&language=en&version=gay`;
             const profileDataResponse = makeApiRequest(profileUrl, 'GET', API_HEADERS, null, 'pornstar profile');
 
             // API v6 response structure: { result: true, code: 0, data: { ...profile fields... }, metadata: {...} }
@@ -1439,11 +1439,11 @@ function createChannelFromProfile(profile, originalUrl, isPornstar = false) {
     // Calculate total video count from all categories
     let totalVideos = 0;
     if (profile.nb_videos) {
-        if (profile.nb_videos.free && profile.nb_videos.free.straight) {
-            totalVideos += profile.nb_videos.free.straight;
+        if (profile.nb_videos.free && profile.nb_videos.free.gay) {
+            totalVideos += profile.nb_videos.free.gay;
         }
-        if (profile.nb_videos.premium && profile.nb_videos.premium.straight) {
-            totalVideos += profile.nb_videos.premium.straight;
+        if (profile.nb_videos.premium && profile.nb_videos.premium.gay) {
+            totalVideos += profile.nb_videos.premium.gay;
         }
     }
 
@@ -1467,10 +1467,10 @@ function createChannelFromProfile(profile, originalUrl, isPornstar = false) {
         description += `\n\n📊 Channel Stats:`;
         if (totalVideos > 0) {
             description += `\n• Total Videos: ${totalVideos.toLocaleString()}`;
-            if (profile.nb_videos.free && profile.nb_videos.free.straight) {
-                description += ` (${profile.nb_videos.free.straight} free`;
-                if (profile.nb_videos.premium && profile.nb_videos.premium.straight) {
-                    description += `, ${profile.nb_videos.premium.straight} premium`;
+            if (profile.nb_videos.free && profile.nb_videos.free.gay) {
+                description += ` (${profile.nb_videos.free.gay} free`;
+                if (profile.nb_videos.premium && profile.nb_videos.premium.gay) {
+                    description += `, ${profile.nb_videos.premium.gay} premium`;
                 }
                 description += `)`;
             }
@@ -1549,20 +1549,20 @@ source.search = function (query, type, order, filters, continuationToken) {
 
         // Fetch search results using search API with page parameter
         // Try page-based URL first, fallback to query parameter if needed
-        let searchUrl = `${BASE_URL}/search/${cleanQuery}/${page}?country=US&language=en&version=STRAIGHT`;
+        let searchUrl = `${BASE_URL}/search/${cleanQuery}/${page}?country=US&language=en&version=gay`;
         let data;
 
         try {
             data = makeApiRequest(searchUrl, 'GET', API_HEADERS, null, 'search results');
         } catch (pageError) {
             // Fallback to query parameter approach if page-based URL fails
-            searchUrl = `${BASE_URL}/search/${cleanQuery}?page=${page}&country=US&language=en&version=STRAIGHT`;
+            searchUrl = `${BASE_URL}/search/${cleanQuery}?page=${page}&country=US&language=en&version=gay`;
             try {
                 data = makeApiRequest(searchUrl, 'GET', API_HEADERS, null, 'search results with page param');
             } catch (paramError) {
                 // Final fallback to original URL for page 0 only
                 if (page === 0) {
-                    searchUrl = `${BASE_URL}/search/${cleanQuery}?country=US&language=en&version=STRAIGHT`;
+                    searchUrl = `${BASE_URL}/search/${cleanQuery}?country=US&language=en&version=gay`;
                     data = makeApiRequest(searchUrl, 'GET', API_HEADERS, null, 'search results fallback');
                 } else {
                     throw paramError;
@@ -1997,7 +1997,7 @@ source.getChannel = function (url) {
         }
 
         // Fetch profile information using profile-page API
-        const profileUrl = `${BASE_URL}/profile-page/${actualProfileId}?country=US&language=en&version=STRAIGHT`;
+        const profileUrl = `${BASE_URL}/profile-page/${actualProfileId}?country=US&language=en&version=gay`;
 
         try {
             const data = makeApiRequest(profileUrl, 'GET', API_HEADERS, null, 'channel info');
@@ -2028,7 +2028,7 @@ source.getChannel = function (url) {
         } catch (apiError) {
             // If the API call failed and we used a resolved ID, try with the original username
             if (actualProfileId !== profileId) {
-                const fallbackUrl = `${BASE_URL}/profile-page/${profileId}?country=US&language=en&version=STRAIGHT`;
+                const fallbackUrl = `${BASE_URL}/profile-page/${profileId}?country=US&language=en&version=gay`;
 
                 try {
                     const fallbackData = makeApiRequest(fallbackUrl, 'GET', API_HEADERS, null, 'channel info fallback');
@@ -2080,7 +2080,7 @@ source.getChannelContents = function (url, type, order, filters, continuationTok
         if (!/^\d+$/.test(profileId) && !profileId.startsWith('pornstar:')) {
             // Try to look up the profile using search
             try {
-                const searchUrl = `${BASE_URL}/search/${encodeURIComponent(profileId)}/0?country=US&language=en&version=STRAIGHT`;
+                const searchUrl = `${BASE_URL}/search/${encodeURIComponent(profileId)}/0?country=US&language=en&version=gay`;
                 const searchData = makeApiRequest(searchUrl, 'GET', API_HEADERS, null, 'profile search');
 
                 // Get first video and extract uploader ID
@@ -2107,7 +2107,7 @@ source.getChannelContents = function (url, type, order, filters, continuationTok
         const page = continuationToken ? (parseInt(continuationToken) || 0) : 0;
 
         // Fetch channel videos using profile-page API
-        const channelUrl = `${BASE_URL}/profile-page/${actualProfileId}/videos/${sortOrder}/${page}?country=US&language=en&version=STRAIGHT`;
+        const channelUrl = `${BASE_URL}/profile-page/${actualProfileId}/videos/${sortOrder}/${page}?country=US&language=en&version=gay`;
         const data = makeApiRequest(channelUrl, 'GET', API_HEADERS, null, 'channel contents');
 
         // API response structure: { result: true, code: 0, data: { ids: [...] } } or legacy { result: true, videos: [...] }
@@ -2174,7 +2174,7 @@ source.getPlaylist = function (url) {
         // Use search API to get playlist contents
         // Format search term with + instead of %20 for spaces
         const formattedSearchTerm = searchTerm.replace(/\s+/g, '+');
-        const searchUrl = `${BASE_URL}/search/${formattedSearchTerm}?country=US&language=en&version=STRAIGHT`;
+        const searchUrl = `${BASE_URL}/search/${formattedSearchTerm}?country=US&language=en&version=gay`;
         const data = makeApiRequest(searchUrl, 'GET', API_HEADERS, null, 'playlist search');
 
         // API response structure: { result: true, code: 0, data: { ids: [...] } } or legacy { ids: [...] }
@@ -2238,7 +2238,7 @@ source.getContentDetails = function (url) {
         const videoId = extractVideoId(url);
 
         // Try mobile API first
-        const detailsUrl = `${BASE_URL}/video-page/${videoId}?country=US&language=en&version=STRAIGHT`;
+        const detailsUrl = `${BASE_URL}/video-page/${videoId}?country=US&language=en&version=gay`;
 
         try {
             const data = makeApiRequest(detailsUrl, 'GET', API_HEADERS, null, 'video details');
@@ -2312,7 +2312,7 @@ function tryWebsiteFallback(url) {
         }
 
         // Try the API again with the actual video ID
-        const actualApiUrl = `${BASE_URL}/video-page/${actualVideoId}?country=US&language=en&version=STRAIGHT`;
+        const actualApiUrl = `${BASE_URL}/video-page/${actualVideoId}?country=US&language=en&version=gay`;
         const actualData = makeApiRequest(actualApiUrl, 'GET', API_HEADERS, null, 'video details with extracted ID');
 
         // API response structure: { result: true, code: 0, data: { video: {...} } } or legacy { video: {...} }
