@@ -1,15 +1,15 @@
 {
     "name": "XVideos Gay",
-    "description": "XVideos Gay video platform plugin for Grayjay",
+    "description": "XVideos video platform plugin for Grayjay",
     "platformUrl": "https://www.xvideos.com",
-    "author": "GreyPluginDev (Forked by chadstubblefield78-dot)",
-    "authorUrl": "https://github.com",
-    "sourceUrl": "https://githubusercontent.com",
-    "repositoryUrl": "https://github.com/grayjay-plugin-xvideos-gay",
+    "author": "chadstubblefield78-dot",
+    "authorUrl": "https://github.com/chadstubblefield78-dot",
+    "sourceUrl": "https://raw.githubusercontent.com/chadstubblefield78-dot/grayjay-plugin-xvideos-gay/refs/heads/master/XVideosConfig.json",
+    "repositoryUrl": "https://github.com/chadstubblefield78-dot/grayjay-plugin-xvideos-gay",
     "scriptUrl": "./XVideosScript.js",
     "version": 4,
     "iconUrl": "./icon.png",
-    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567892",
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
     "scriptSignature": "",
     "scriptPublicKey": "",
     "packages": ["Http"],
@@ -21,7 +21,7 @@
     ],
     "changelog": {
         "4": [
-            "Update sourceUrl for gay category fork"
+            "Update sourceUrl"
         ]
     }
 }
